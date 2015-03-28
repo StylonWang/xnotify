@@ -6,8 +6,8 @@
 static int __init drv_init(void)
 {
     int ret;
-
     ret = xnotify_init();
+    return ret;
 }
 
 static void __exit drv_exit(void)
@@ -17,4 +17,4 @@ static void __exit drv_exit(void)
 
 module_init(drv_init);
 module_exit(drv_exit);
-
+MODULE_LICENSE("BSD");
