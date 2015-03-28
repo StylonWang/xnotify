@@ -36,8 +36,6 @@
 #include <stdio.h>
 #include <errno.h>
 
-#define NETLINK_USER 31
-
 #define MAX_PAYLOAD 1024 /* maximum payload size*/
 
 #define DBG_ERR(fmt, args...) do { \
@@ -58,6 +56,8 @@ int main(int argc, char **argv)
 
     DBG_INFO("opening socket\n");
 
+    memset(&msg, 0, sizeof(msg));
+
     sock_fd = socket(PF_NETLINK, SOCK_RAW, NETLINK_USERSOCK);
     if (sock_fd < 0) {
         DBG_ERR("unable to open socket: %s\n", strerror(errno));
@@ -67,6 +67,7 @@ int main(int argc, char **argv)
     memset(&src_addr, 0, sizeof(src_addr));
     src_addr.nl_family = AF_NETLINK;
     src_addr.nl_pid = getpid(); /* self pid */
+    src_addr.nl_groups = 0; /* not in mcast groups */ 
 
     bind(sock_fd, (struct sockaddr *)&src_addr, sizeof(src_addr));
 

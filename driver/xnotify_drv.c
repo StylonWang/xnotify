@@ -27,6 +27,8 @@
  */
 
 #include <linux/module.h>
+#include <linux/kernel.h>
+#include <linux/init.h>
 #include <net/sock.h>
 #include <linux/netlink.h>
 #include <linux/skbuff.h>
@@ -84,7 +86,7 @@ static void xnotify_nl_recv_msg(struct sk_buff *skb)
 int xnotify_init(void)
 {
     struct netlink_kernel_cfg cfg = {
-        .groups = 0xFF,
+        .groups = 0, //0xFF,
         .input = xnotify_nl_recv_msg,
     };
 
