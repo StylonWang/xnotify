@@ -86,7 +86,7 @@ static void xnotify_nl_recv_msg(struct sk_buff *skb)
 int xnotify_init(void)
 {
     struct netlink_kernel_cfg cfg = {
-        .groups = 0, //0xFF,
+        .groups =0xFF,
         .input = xnotify_nl_recv_msg,
     };
 
